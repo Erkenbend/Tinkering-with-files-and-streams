@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 public class TriggerController implements TriggerApi {
 
     private final FileApi fileApi;
+    private final ComputeService computeService;
 
     @Override
     public Mono<ResponseEntity<Long>> trigger(
@@ -24,7 +25,7 @@ public class TriggerController implements TriggerApi {
         return fileApi.getFilesInfo(groupId)
                 .doOnNext(fileInfo -> log.info("Downloading file {}-{} ({} bytes)", groupId, fileInfo.getId(), fileInfo.getContentLength()))
                 .flatMap(fileInfo -> fileApi.getFile(groupId, fileInfo.getId()))
-                .map(fileContent -> (long) fileContent.length)
+                .flatMap(computeService::computeSize)
                 .reduce(Long::sum)
                 .map(ResponseEntity::ok);
     }

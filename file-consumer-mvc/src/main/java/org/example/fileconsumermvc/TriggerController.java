@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 public class TriggerController implements TriggerApi {
 
     private final FileApi fileApi;
+    private final ComputeService computeService;
 
     @Override
     public ResponseEntity<Long> trigger(Integer groupId) {
         return fileApi.getFilesInfo(groupId)
                 .doOnNext(fileInfo -> log.info("Downloading file {}-{} ({} bytes)", groupId, fileInfo.getId(), fileInfo.getContentLength()))
                 .flatMap(fileInfo -> fileApi.getFile(groupId, fileInfo.getId()))
-                .map(fileContent -> (long) fileContent.length)
+                .map(computeService::computeSize)
                 .reduce(Long::sum)
                 .map(ResponseEntity::ok)
                 .block();
