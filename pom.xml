@@ -29,6 +29,8 @@
 
     <modules>
         <module>file-provider</module>
+        <module>file-consumer-reactive</module>
+        <module>file-consumer-mvc</module>
     </modules>
 
     <dependencyManagement>

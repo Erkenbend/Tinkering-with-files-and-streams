@@ -1,0 +1,37 @@
+openapi: 3.1.0
+info:
+  title: File-Provider API
+  version: 0.0.1
+  description: |
+    Use to trigger file download process
+servers:
+  - url: https://localhost:8002
+    description: Reactive implementation
+  - url: https://localhost:8003
+    description: MVC implementation
+tags:
+  - name: Trigger
+    description: Triggering the process
+paths:
+  /trigger/{groupId}:
+    get:
+      tags:
+        - Trigger
+      summary: Trigger the download of all files in the group
+      operationId: trigger
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: integer
+            examples:
+              - 5
+      responses:
+        '200':
+          description: Total downloaded size in bytes
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64

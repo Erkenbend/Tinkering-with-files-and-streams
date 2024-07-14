@@ -1,7 +1,7 @@
 package org.example.fileconsumerreactive;
 
-import org.example.ApiClient;
-import org.example.api.FileApi;
+import org.example.fileprovider.ApiClient;
+import org.example.fileprovider.api.FileApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

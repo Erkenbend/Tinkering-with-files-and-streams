@@ -85,11 +85,11 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/../api.yml</inputSpec>
+                            <inputSpec>${project.basedir}/../spec/provider-api.yml</inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
-                            <apiPackage>org.example.api</apiPackage>
-                            <modelPackage>org.example.api.model</modelPackage>
+                            <apiPackage>org.example.fileprovider.api</apiPackage>
+                            <modelPackage>org.example.fileprovider.api.model</modelPackage>
                             <configOptions>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <interfaceOnly>true</interfaceOnly>

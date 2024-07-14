@@ -3,7 +3,7 @@ package org.example.fileprovider;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import org.example.api.model.FileInfo;
+import org.example.fileprovider.api.model.FileInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

@@ -2,8 +2,8 @@ package org.example.fileprovider;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.example.api.FileApi;
-import org.example.api.model.FileInfo;
+import org.example.fileprovider.api.FileApi;
+import org.example.fileprovider.api.model.FileInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.server.ServerWebExchange;

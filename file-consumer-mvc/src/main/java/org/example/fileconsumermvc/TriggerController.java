@@ -1,28 +1,27 @@
-package org.example.fileconsumerreactive;
+package org.example.fileconsumermvc;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.example.api.FileApi;
+import org.example.fileprovider.api.FileApi;
+import org.example.fileconsumer.api.TriggerApi;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import reactor.core.publisher.Mono;
 
 @Controller
 @RequiredArgsConstructor
 @Log4j2
-public class MyController {
+public class TriggerController implements TriggerApi {
 
     private final FileApi fileApi;
 
-    @GetMapping("/trigger/{groupId}")
-    public Mono<ResponseEntity<Integer>> triggerFileDownload(@PathVariable Integer groupId) {
+    @Override
+    public ResponseEntity<Long> trigger(Integer groupId) {
         return fileApi.getFilesInfo(groupId)
                 .doOnNext(fileInfo -> log.info("Downloading file {}-{} ({} bytes)", groupId, fileInfo.getId(), fileInfo.getContentLength()))
                 .flatMap(fileInfo -> fileApi.getFile(groupId, fileInfo.getId()))
-                .map(fileContent -> fileContent.length)
-                .reduce(Integer::sum)
-                .map(ResponseEntity::ok);
+                .map(fileContent -> (long) fileContent.length)
+                .reduce(Long::sum)
+                .map(ResponseEntity::ok)
+                .block();
     }
 }
