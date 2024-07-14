@@ -28,7 +28,7 @@ paths:
         '200':
           description: List of available files in group
           content:
-            application/json:
+            text/event-stream:
               schema:
                 type: array
                 items:
@@ -61,7 +61,7 @@ paths:
             application/octet-stream:
               schema:
                 type: string
-                format: binary
+                format: byte
 components:
   schemas:
     FileInfo:
