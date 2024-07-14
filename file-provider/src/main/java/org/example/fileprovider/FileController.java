@@ -1,6 +1,7 @@
 package org.example.fileprovider;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.example.api.FileApi;
 import org.example.api.model.FileInfo;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Controller
 @RequiredArgsConstructor
+@Log4j2
 public class FileController implements FileApi {
 
     private final FileService fileService;
@@ -21,7 +23,9 @@ public class FileController implements FileApi {
             Integer fileId,
             final ServerWebExchange exchange
     ) {
-        return fileService.getFile(groupId, fileId).map(ResponseEntity::ok);
+        return fileService.getFile(groupId, fileId)
+                .doOnNext(fileContent -> log.info("Transmitting file {}-{} ({} bytes)", groupId, fileId, fileContent.length))
+                .map(ResponseEntity::ok);
     }
 
     @Override
