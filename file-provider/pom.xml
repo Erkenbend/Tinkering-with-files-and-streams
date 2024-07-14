@@ -88,8 +88,8 @@
                             <inputSpec>${project.basedir}/../spec/provider-api.yml</inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
-                            <apiPackage>org.example.fileprovider.api</apiPackage>
-                            <modelPackage>org.example.fileprovider.api.model</modelPackage>
+                            <apiPackage>${file-provider.base-api-package}</apiPackage>
+                            <modelPackage>${file-provider.base-api-package}.model</modelPackage>
                             <configOptions>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <interfaceOnly>true</interfaceOnly>

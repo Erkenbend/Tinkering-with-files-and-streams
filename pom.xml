@@ -25,6 +25,9 @@
         <swagger-core.version>2.2.21</swagger-core.version>
         <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+
+        <file-provider.base-api-package>org.example.fileprovider.api</file-provider.base-api-package>
+        <file-consumer.base-api-package>org.example.fileconsumer.api</file-consumer.base-api-package>
     </properties>
 
     <modules>

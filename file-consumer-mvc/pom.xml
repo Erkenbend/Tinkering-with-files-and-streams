@@ -74,8 +74,8 @@
                             <inputSpec>${project.basedir}/../spec/provider-api.yml</inputSpec>
                             <generatorName>java</generatorName>
                             <library>webclient</library>
-                            <apiPackage>org.example.fileprovider.api</apiPackage>
-                            <modelPackage>org.example.fileprovider.api.model</modelPackage>
+                            <apiPackage>${file-provider.base-api-package}</apiPackage>
+                            <modelPackage>${file-provider.base-api-package}.model</modelPackage>
                             <configOptions>
                                 <useJakartaEe>true</useJakartaEe>
                             </configOptions>
@@ -90,8 +90,8 @@
                             <inputSpec>${project.basedir}/../spec/consumer-api.yml</inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
-                            <apiPackage>org.example.fileconsumer.api</apiPackage>
-                            <modelPackage>org.example.fileconsumer.api.model</modelPackage>
+                            <apiPackage>${file-consumer.base-api-package}</apiPackage>
+                            <modelPackage>${file-consumer.base-api-package}.model</modelPackage>
                             <configOptions>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <interfaceOnly>true</interfaceOnly>
