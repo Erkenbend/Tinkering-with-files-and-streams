@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: File-Provider API
+  version: 0.0.1
+  description: |
+    Assume that group N contains N files
+servers:
+  - url: https://localhost:8001
+tags:
+  - name: File
+    description: Getting files
+paths:
+  /files-info/{groupId}:
+    get:
+      tags:
+        - File
+      summary: Lists all files available for a given group
+      operationId: getFilesInfo
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: integer
+            examples:
+              - 5
+      responses:
+        '200':
+          description: List of available files in group
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileInfo'
+  /file/{groupId}/{fileId}:
+    get:
+      tags:
+        - File
+      summary: Retrieve one file
+      operationId: getFile
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: integer
+            examples:
+              - 5
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+            examples:
+              - 8
+      responses:
+        '200':
+          description: File as raw bytes
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    FileInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          examples:
+            - 10
+        contentLength:
+          type: integer
+          format: int64
+          examples:
+            - 4321
