@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.util.function.Tuple2;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -28,9 +27,9 @@ public class FileService {
     public Flux<FileInfo> getFiles(Integer groupId) {
         Instant startTime = Instant.now();
 
-        return Flux.range(1, groupId)
-                .zipWith(Flux.interval(Duration.ofMillis(delayBetweenFilesMillis)))
-                .map(Tuple2::getT1)
+        return Flux.interval(Duration.ofMillis(delayBetweenFilesMillis))
+                .map(l -> l.intValue() + 1)
+                .takeUntil(i -> i >= groupId)
                 .map(this::getFileInfo)
                 .doOnComplete(() -> log.info("All files fetched in {}ms", Duration.between(startTime, Instant.now()).toMillis()));
     }
